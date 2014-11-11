@@ -13,18 +13,6 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 		$this->loginStatus = false;
 
 		$this->login = new Login($this->loginName, $this->loginIp, $this->loginCountry, $this->loginStatus);
-
-		$this->loginMock = $this->getMockBuilder('Tdd\Homework4\Login')->setConstructorArgs(array($this->loginName, $this->loginIp, $this->loginCountry, $this->loginStatus))->getMock();
-
-		$this->loginMock->expects($this->any())->method('setLoginName')->will($this->returnValue(null));
-		$this->loginMock->expects($this->any())->method('setLoginIp')->will($this->returnValue(null));
-		$this->loginMock->expects($this->any())->method('setLoginCountry')->will($this->returnValue(null));
-		$this->loginMock->expects($this->any())->method('setLoginStatus')->will($this->returnValue(null));
-
-		$this->loginMock->expects($this->any())->method('getLoginName')->will($this->returnValue($this->loginName));
-		$this->loginMock->expects($this->any())->method('getLoginIp')->will($this->returnValue($this->loginIp));
-		$this->loginMock->expects($this->any())->method('getLoginCountry')->will($this->returnValue($this->loginCountry));
-		$this->loginMock->expects($this->any())->method('getLoginStatus')->will($this->returnValue(false));
 	}
 
 	public function getExpectedAttributeList()
@@ -62,11 +50,5 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 		$getter = 'get' . ucfirst($attribute);
 		$this->login->$setter($this->$attribute);
 		$this->assertEquals($this->$attribute, $this->login->$getter());
-	}
-
-	public function testCheckNoFraudIfAuthenticationSucceeds()
-	{
-		$this->login->setLoginStatus(true);
-		$this->assertFalse($this->login->hasFraud());
 	}
 }

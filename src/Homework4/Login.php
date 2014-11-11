@@ -55,18 +55,4 @@ class Login
 	{
 		$this->loginStatus = $loginStatus;
 	}
-
-	public function hasFraud()
-	{
-		$response = false;
-
-		if ($this->getLoginStatus())
-		{
-			return $response;
-		}
-
-		// fraud tests
-
-		return $response;
-	}
 }
