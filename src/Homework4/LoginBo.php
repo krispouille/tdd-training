@@ -13,26 +13,47 @@ class LoginBo
 
 		if ($attempt->getLoginStatus() === true)
 		{
-			// reset data
-			$userDo->setCounter(0);
-			$ipDo->setCounter(0);
-			$countryDo->setCounter(0);
+			// reset counters (if they were not already to 0)
+			if ($userDo->getCounter() != 0)
+			{
+				$userDo->setCounter(0);
+				$userDo->save();
+			}
 
-			$showCaptcha = true;
+			if ($ipDo->getCounter() != 0)
+			{
+				$ipDo->setCounter(0);
+				$ipDo->save();
+			}
+
+			if ($countryDo->getCounter() != 0)
+			{
+				$countryDo->setCounter(0);
+				$countryDo->save();
+			}
 		}
+		// failure in authentication => log
 		else
 		{
+			// increment counters
 			$userDo->incrementCounter();
 			$ipDo->incrementCounter();
 			$countryDo->incrementCounter();
 
-			// compare login logs and attempt
-		}
+			// save data
+			$userDo->save();
+			$ipDo->save();
+			$countryDo->save();
 
-		// save data
-		$userDo->save();
-		$ipDo->save();
-		$countryDo->save();
+			// compare login logs and attempt
+			if (
+				$userDo->getCounter() === LoginDo::USER_FAILURES
+				|| $countryDo->getCounter() === LoginDo::COUNTRY_FAILURES
+				|| $ipDo->getCounter() === LoginDo::IP_FAILURES
+			) {
+				$showCaptcha = true;
+			}
+		}
 
 		return $showCaptcha;
 	}

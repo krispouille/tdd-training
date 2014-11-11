@@ -4,6 +4,10 @@ namespace Tdd\Homework4;
 class LoginDo
 {
 	const LOG_TTL = 3600;
+	const USER_FAILURES = 3;
+	const IP_FAILURES = 3;
+	const IP_RANGE_FAILURES = 500;
+	const COUNTRY_FAILURES = 1000;
 
 	protected $key;
 	protected $value;
