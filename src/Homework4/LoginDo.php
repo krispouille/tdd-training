@@ -1,6 +1,11 @@
 <?php
 namespace Tdd\Homework4;
 
+/**
+ * Login Data Object class to get/store a state on a datasource.
+ *
+ * @package Tdd\Homework4
+ */
 class LoginDo
 {
 	const LOG_TTL = 3600;
@@ -9,14 +14,33 @@ class LoginDo
 	const IP_RANGE_FAILURES = 500;
 	const COUNTRY_FAILURES = 1000;
 
-	protected $key;
-	protected $value;
-	protected $counter;
-	protected $timestamp;
+    /**
+     * Field in datasource (username | ip | country ...).
+     * @var string
+     */
+    protected $field;
 
-	public function __construct($key, $value = null, $counter = 0, $timestamp = 0)
+    /**
+     * Value in datasource.
+     * @var mixed
+     */
+    protected $value;
+
+    /**
+     * Counter.
+     * @var int
+     */
+    protected $counter;
+
+    /**
+     * Timestamp.
+     * @var int
+     */
+    protected $timestamp;
+
+	public function __construct($field, $value = null, $counter = 0, $timestamp = 0)
 	{
-		$this->setKey($key);
+		$this->setField($field);
 		$this->setValue($value);
 		$this->setCounter($counter);
 		$this->setTimestamp($timestamp);
@@ -25,16 +49,16 @@ class LoginDo
 	/**
 	 * Load last state of data from a datasource (database, etc.).
 	 * If no entry found, return a new instance.
-	 * @param string $key
+	 * @param string $field
 	 * @param mixed $value
 	 *
 	 * @return LoginDo
 	 */
-	public static function load($key, $value)
+	public static function load($field, $value)
 	{
-		$result = self::find($key, $value);
+		$result = self::find($field, $value);
 
-		$loginDo = new LoginDo($key, $value);
+		$loginDo = new LoginDo($field, $value);
 
 		if (!empty($result))
 		{
@@ -46,35 +70,54 @@ class LoginDo
 
 	/**
 	 * Get data from a datasource if found. Otherwise returns false.
-	 * @param string $key
+	 * @param string $field
 	 * @param mixed $value
 	 *
 	 * @return array
 	 */
-	public static function find($key, $value)
+	public static function find($field, $value)
 	{
 		return false;
 	}
 
-	public function save()
+    /**
+     * Save data in datasource (depending on TTL).
+     */
+    public function save()
 	{
 		if (time() - $this->timestamp > self::LOG_TTL)
 		{
-			// save this state
+			// save data state in datasource
 		}
 	}
 
-	public function setKey($key)
+    /**
+     * Sets field.
+     *
+     * @param string $field
+     */
+    public function setField($field)
 	{
-		$this->key = $key;
+		$this->field = $field;
 	}
 
-	public function setValue($value)
+    /**
+     * Sets value.
+     *
+     * @param mixed $value
+     */
+    public function setValue($value)
 	{
 		$this->value = $value;
 	}
 
-	public function setCounter($counter)
+    /**
+     * Sets counter.
+     *
+     * @param $counter
+     * @throws \Exception
+     */
+    public function setCounter($counter)
 	{
 		if (!is_int($counter) || $counter < 0)
 		{
@@ -83,32 +126,56 @@ class LoginDo
 		$this->counter = $counter;
 	}
 
-	public function incrementCounter()
+    /**
+     * Increment counter.
+     */
+    public function incrementCounter()
 	{
 		$this->counter++;
 	}
 
-	public function setTimestamp($timestamp)
+    /**
+     * Sets timestamp.
+     *
+     * @param $timestamp
+     */
+    public function setTimestamp($timestamp)
 	{
 		$this->timestamp = $timestamp;
 	}
 
-	public function getKey()
+    /**
+     * Gets field.
+     * @return string
+     */
+    public function getField()
 	{
-		return $this->key;
+		return $this->field;
 	}
 
-	public function getValue()
+    /**
+     * Gets value.
+     * @return mixed
+     */
+    public function getValue()
 	{
 		return $this->value;
 	}
 
-	public function getCounter()
+    /**
+     * Gets counter.
+     * @return int
+     */
+    public function getCounter()
 	{
 		return $this->counter;
 	}
 
-	public function getTimestamp()
+    /**
+     * Gets timestamp.
+     * @return int
+     */
+    public function getTimestamp()
 	{
 		return $this->timestamp;
 	}

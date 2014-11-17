@@ -1,14 +1,41 @@
 <?php
 namespace Tdd\Homework4;
 
+/**
+ * Login Class that stores current login attempt data.
+ * @package Tdd\Homework4
+ */
 class Login
 {
-	protected $loginName;
-	protected $loginIp;
-	protected $loginCountry;
-	protected $loginStatus;
+    /**
+     * @var string
+     */
+    protected $loginName;
 
-	public function __construct($loginName, $loginIp, $loginCountry, $loginStatus = false)
+    /**
+     * @var string
+     */
+    protected $loginIp;
+
+    /**
+     * @var string
+     */
+    protected $loginCountry;
+
+    /**
+     * @var bool
+     */
+    protected $loginStatus;
+
+    /**
+     * Initialize login attempt (with data)
+     *
+     * @param string $loginName
+     * @param string $loginIp
+     * @param string $loginCountry
+     * @param bool $loginStatus
+     */
+    public function __construct($loginName, $loginIp, $loginCountry, $loginStatus = false)
 	{
 		$this->loginName = $loginName;
 		$this->loginIp = $loginIp;
@@ -16,42 +43,74 @@ class Login
 		$this->loginStatus = $loginStatus;
 	}
 
-	public function getLoginName()
+    /**
+     * Gets login username.
+     * @return string
+     */
+    public function getLoginName()
 	{
 		return $this->loginName;
 	}
 
-	public function getLoginIp()
+    /**
+     * Gets login ip.
+     * @return string
+     */
+    public function getLoginIp()
 	{
 		return $this->loginIp;
 	}
 
-	public function getLoginCountry()
+    /**
+     * Gets login country.
+     * @return string
+     */
+    public function getLoginCountry()
 	{
 		return $this->loginCountry;
 	}
 
-	public function getLoginStatus()
+    /**
+     * Gets login status.
+     * @return bool
+     */
+    public function getLoginStatus()
 	{
 		return $this->loginStatus;
 	}
 
-	public function setLoginName($loginName)
+    /**
+     * Sets login username.
+     * @param string $loginName
+     */
+    public function setLoginName($loginName)
 	{
 		$this->loginName = $loginName;
 	}
 
-	public function setLoginIp($loginIp)
+    /**
+     * Sets login ip.
+     * @param string $loginIp
+     */
+    public function setLoginIp($loginIp)
 	{
 		$this->loginIp = $loginIp;
 	}
 
-	public function setLoginCountry($loginCountry)
+    /**
+     * Sets login country.
+     * @param string $loginCountry
+     */
+    public function setLoginCountry($loginCountry)
 	{
 		$this->loginCountry = $loginCountry;
 	}
 
-	public function setLoginStatus($loginStatus)
+    /**
+     * Sets login status.
+     * @param bool $loginStatus
+     */
+    public function setLoginStatus($loginStatus)
 	{
 		$this->loginStatus = $loginStatus;
 	}

@@ -3,6 +3,11 @@ namespace Tdd\Test\Homework4;
 
 use Tdd\Homework4\LoginDo;
 
+/**
+ * Login Data Object Class Test.
+ *
+ * @package Tdd\Test\Homework4
+ */
 class LoginDoTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
@@ -15,10 +20,14 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 		$this->loginDo = new LoginDo($this->key, $this->value, $this->counter, $this->timestamp);
 	}
 
+    /**
+     * Data provider that gives turn by turn the expected attributes to test.
+     * @return array
+     */
 	public function getExpectedAttributeList()
 	{
 		return array(
-			array('key'),
+			array('field'),
 			array('value'),
 			array('counter'),
 			array('timestamp'),
@@ -26,6 +35,7 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+     * Test HasAttributes methods.
 	 * @dataProvider getExpectedAttributeList
 	 */
 	public function testHasAttribute($attribute)
@@ -34,6 +44,7 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+     * Test Getters.
 	 * @dataProvider getExpectedAttributeList
 	 */
 	public function testGetter($attribute)
@@ -43,6 +54,7 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+     * Test Setters.
 	 * @dataProvider getExpectedAttributeList
 	 */
 	public function testSetter($attribute)
@@ -53,7 +65,10 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($this->$attribute, $expected);
 	}
 
-	public function testSetCounterExceptionIfNotPositiveInteger()
+    /**
+     * Test exception raised if non positive integer value for counter.
+     */
+    public function testSetCounterExceptionIfNotPositiveInteger()
 	{
 		$invalidValues = array(
 			-1,
@@ -64,7 +79,10 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 		$this->loginDo->setCounter($invalidValues[rand(0, count($invalidValues))]);
 	}
 
-	public function testIncrementCounter()
+    /**
+     * Test counter incrementation.
+     */
+    public function testIncrementCounter()
 	{
 		$before = \PHPUnit_Framework_Assert::readAttribute($this->loginDo, 'counter');
 		$this->loginDo->incrementCounter();

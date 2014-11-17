@@ -3,6 +3,11 @@ namespace Tdd\Test\Homework4;
 
 use Tdd\Homework4\Login;
 
+/**
+ * Login Class Test.
+ *
+ * @package Tdd\Test\Homework4
+ */
 class LoginTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
@@ -15,7 +20,11 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 		$this->login = new Login($this->loginName, $this->loginIp, $this->loginCountry, $this->loginStatus);
 	}
 
-	public function getExpectedAttributeList()
+    /**
+     * Data provider that gives turn by turn the expected attributes to test.
+     * @return array
+     */
+    public function getExpectedAttributeList()
 	{
 		return array(
 			array('loginName'),
@@ -26,6 +35,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+     * Test all HasAttribute... methods.
+     *
 	 * @dataProvider getExpectedAttributeList
 	 */
 	public function testHasAttribute($attribute)
@@ -34,6 +45,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+     * Test all getters.
+     *
 	 * @dataProvider getExpectedAttributeList
 	 */
 	public function testGetter($attribute)
@@ -43,6 +56,8 @@ class LoginTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+     * Test all setters.
+     *
 	 * @dataProvider getExpectedAttributeList
 	 */
 	public function testSetter($attribute)
