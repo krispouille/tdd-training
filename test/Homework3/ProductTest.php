@@ -25,6 +25,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
 			array('quantity'),
 			array('price'),
 			array('unit'),
+            array('label'),
 		);
 	}
 
@@ -73,4 +74,10 @@ class ProductTest extends \PHPUnit_Framework_TestCase
 		$this->setExpectedException('Exception');
 		$this->product->setQuantity(-10);
 	}
+
+    public function testInvalidLabel()
+    {
+        $this->setExpectedException('Exception');
+        $this->product->setLabel(1000);
+    }
 }

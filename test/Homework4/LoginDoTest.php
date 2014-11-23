@@ -12,12 +12,12 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 {
 	public function setUp()
 	{
-		$this->key = 'username';
+		$this->field = 'username';
 		$this->value = 'jchrislain';
 		$this->counter = 0;
 		$this->timestamp = time();
 
-		$this->loginDo = new LoginDo($this->key, $this->value, $this->counter, $this->timestamp);
+		$this->loginDo = new LoginDo($this->field, $this->value, $this->counter, $this->timestamp);
 	}
 
     /**
@@ -76,7 +76,7 @@ class LoginDoTest extends \PHPUnit_Framework_TestCase
 			new \stdClass(),
 		);
 		$this->setExpectedException('Exception');
-		$this->loginDo->setCounter($invalidValues[rand(0, count($invalidValues))]);
+		$this->loginDo->setCounter($invalidValues[rand(0, count($invalidValues)-1)]);
 	}
 
     /**

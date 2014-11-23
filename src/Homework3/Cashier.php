@@ -7,7 +7,7 @@ class Cashier
 {
 	protected $products = array();
 
-	public function addProduct(Product $product)
+	public function addProduct($product)
 	{
 		if (!$product instanceof Product)
 		{

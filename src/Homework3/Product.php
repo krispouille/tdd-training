@@ -74,5 +74,6 @@ class Product
 		{
 			throw new \Exception('invalid label : string expected');
 		}
+        $this->label = $label;
 	}
 }
