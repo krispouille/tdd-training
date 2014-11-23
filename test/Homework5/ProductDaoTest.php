@@ -5,6 +5,7 @@ use Tdd\Homework5\Product;
 use Tdd\Homework5\NullProduct;
 use Tdd\Homework5\ProductDao;
 use PDO;
+
 /**
  * ProductDao  Object Class Test.
  *
@@ -12,6 +13,11 @@ use PDO;
  */
 class ProductDaoTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * Setup for each test.
+     * 1- Empty table.
+     * 2- Add products manually.
+     */
     public function setUp()
     {
         $dsn = sprintf("sqlite:%s", '/home/krispouille/Documents/tdd-training/src/Homework5/product.db');
@@ -52,30 +58,45 @@ class ProductDaoTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Tests getting a product by id returns Product instance if found.
+     */
     public function testGetByIdReturnsProductIfFound()
     {
         $product = ProductDao::getById(1);
         $this->assertTrue($product instanceof Product);
     }
 
+    /**
+     * Tests getting a product by id returns NullProduct instance if not found.
+     */
     public function testGetByIdReturnsNullProductIfNotFound()
     {
         $product = ProductDao::getById(0);
         $this->assertTrue($product instanceof NullProduct);
     }
 
+    /**
+     * Tests getting a product by ean returns Product instance if found.
+     */
     public function testGetByEanReturnsProductIfFound()
     {
         $product = ProductDao::getByEan('1234');
         $this->assertTrue($product instanceof Product);
     }
 
+    /**
+     * Tests getting a product by ean returns NullProduct instance if found.
+     */
     public function testGetByEanReturnsNullProductIfNotFound()
     {
         $product = ProductDao::getByEan('');
         $this->assertTrue($product instanceof NullProduct);
     }
 
+    /**
+     * Tests creating a product returns FALSE if product already exists (with same ean).
+     */
     public function testCreateProductReturnsFalseIfProductExists()
     {
         $product = new Product();
@@ -85,6 +106,9 @@ class ProductDaoTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response);
     }
 
+    /**
+     * Tests creating a product returns TRUE if success.
+     */
     public function testCreateProductReturnsTrueIfSuccess()
     {
         $product = new Product();
@@ -94,6 +118,9 @@ class ProductDaoTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response);
     }
 
+    /**
+     * Tests deleting a product returns TRUE if product exists.
+     */
     public function testDeleteProductReturnsTrueIfProductExists()
     {
         $product = new Product();
@@ -107,6 +134,9 @@ class ProductDaoTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Tests modifying a product returns TRUE if success.
+     */
     public function testModifyReturnsTrueIfSuccess()
     {
         $product = new Product();
@@ -116,6 +146,9 @@ class ProductDaoTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response);
     }
 
+    /**
+     * Tests modifying a product returns FALSE if product do no exist.
+     */
     public function testModifyReturnsFalseIfProductNotExists()
     {
         $product = new Product();
