@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Tdd Training" default="welcome" basedir="." description="a demo project">
+
+ <property name="message" value="Hello World!"/>
+ 
+ <target name="welcome">
+  <echo msg="${message}"/>
+ </target>
+ 
+ <target name="test">
+  <phpunit printsummary="true" haltonfailure="true">
+   <batchtest>
+    <fileset dir="./test">
+     <include name="*Test.php"/>
+    </fileset>
+   </batchtest>
+  </phpunit>
+ </target>
+ 
+</project>
